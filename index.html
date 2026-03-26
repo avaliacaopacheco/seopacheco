@@ -93,7 +93,7 @@
         }
         input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
 
-        #mensagem-erro {
+        #mensagem-erro, #mensagem-erro-zap {
             display: none; background: rgba(230, 57, 70, 0.2); border: 1px solid var(--pacheco-red);
             color: #fff; padding: 12px; border-radius: 8px; margin-top: 10px;
             font-weight: bold; font-size: 0.9rem; text-align: center; animation: tremer 0.3s;
@@ -113,7 +113,7 @@
             margin-top: 20px; cursor: pointer;
         }
 
-        #sucesso, #ja-respondeu { display: none; padding: 40px 10px; }
+        #sucesso { display: none; padding: 40px 10px; }
         .check-icon { font-size: 4.5rem; margin-bottom: 20px; }
         .success-text { font-size: 1.1rem; line-height: 1.6; color: #eee; text-align: center; }
 
@@ -143,15 +143,6 @@
 
         <div class="card" data-aos="fade-up">
             
-            <div id="ja-respondeu">
-                <i class="fas fa-ticket-alt check-icon" style="color: #ff8c00;"></i>
-                <div class="success-text">
-                    <p><strong>VOCÊ JÁ ESTÁ CONCORRENDO!</strong></p><br>
-                    <p>Já recebemos sua avaliação anteriormente.</p>
-                    <p style="font-size: 1.4rem; color: #ff8c00; font-weight: 900; margin-top: 15px;">BOA SORTE!</p>
-                </div>
-            </div>
-
             <form id="feedback-form">
                 
                 <label class="pergunta-label"><i class="fas fa-drumstick-bite"></i> O que você achou da Refeição?</label>
@@ -197,13 +188,17 @@
                 <input type="text" name="nome" id="input-nome" placeholder="Digite seu Nome" required>
 
                 <label class="pergunta-label">Seu WhatsApp:</label>
-                <input type="tel" name="whatsapp" placeholder="(19) 99999-9999" required>
+                <input type="tel" name="whatsapp" id="input-whatsapp" placeholder="(19) 99999-9999" required>
 
                 <label class="pergunta-label">Sua Data de Nascimento:</label>
                 <input type="date" name="nascimento" required>
 
                 <div id="mensagem-erro">
                     <i class="fas fa-exclamation-triangle"></i> Por favor, preencha todos os campos e marque as estrelinhas!
+                </div>
+                
+                <div id="mensagem-erro-zap">
+                    <i class="fas fa-ban"></i> Este número de WhatsApp já participou da pesquisa!
                 </div>
 
                 <button type="submit" class="btn-enviar" id="btn-submit">ENVIAR AVALIAÇÃO</button>
@@ -217,6 +212,10 @@
                     <p>Caso você seja sorteado, entraremos em contato pelo WhatsApp.</p><br>
                     <p style="font-size: 1.4rem; color: #ff8c00; font-weight: 900;">BOA SORTE!</p>
                 </div>
+                
+                <button onclick="location.reload();" style="background:none; border:2px solid #ff8c00; color:#ff8c00; padding:12px 20px; border-radius:12px; margin-top:35px; cursor:pointer; font-size: 1rem; font-weight: bold;">
+                    <i class="fas fa-users"></i> Nova Avaliação (Outra Pessoa)
+                </button>
             </div>
         </div>
     </div>
@@ -233,20 +232,14 @@
         const f = document.getElementById('feedback-form');
         const btnSubmit = document.getElementById('btn-submit');
         const msgErro = document.getElementById('mensagem-erro');
+        const msgErroZap = document.getElementById('mensagem-erro-zap');
         const cardPromocao = document.getElementById('card-promocao');
-        const telaJaRespondeu = document.getElementById('ja-respondeu');
+        const inputZap = document.getElementById('input-whatsapp');
 
-        // Verifica se já respondeu
-        if (localStorage.getItem('pesquisaPachecoRespondida') === 'true') {
-            cardPromocao.style.display = 'none';
-            f.style.display = 'none';
-            telaJaRespondeu.style.display = 'block';
-        }
-
-        // Link oficial da sua planilha
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzJjj7CCZLnf-1serYKYAgGRAc50IAqo-gbNnVA9vdnRWY0Yh3dENhehOkXNalQy8za4w/exec';
 
         btnSubmit.addEventListener('click', () => {
+            msgErroZap.style.display = 'none';
             if (!f.checkValidity()) {
                 msgErro.style.display = 'block';
             } else {
@@ -258,22 +251,33 @@
             if (!f.checkValidity()) { return; }
             e.preventDefault();
             
-            // Pega só o primeiro nome
+            // Pega a lista de números já usados neste celular
+            let numerosUsados = JSON.parse(localStorage.getItem('pachecoZaps') || '[]');
+            
+            // Limpa o número digitado para evitar truques com espaços e traços
+            let zapDigitado = inputZap.value.replace(/[^a-zA-Z0-9]/g, '');
+
+            // Se o número já foi usado, aciona a trava e para tudo
+            if (numerosUsados.includes(zapDigitado)) {
+                msgErroZap.style.display = 'block';
+                return; 
+            }
+            
             const nomeCompleto = document.getElementById('input-nome').value;
             const primeiroNome = nomeCompleto.split(' ')[0]; 
             document.getElementById('nome-tela-sucesso').innerText = primeiroNome.toUpperCase();
 
             msgErro.style.display = 'none';
+            msgErroZap.style.display = 'none';
             btnSubmit.innerText = "ENVIANDO...";
             btnSubmit.disabled = true;
 
-            // Envia para o Google Sheets
             fetch(scriptURL, { method: 'POST', body: new FormData(f) })
                 .then(response => {
-                    // Carimba o celular do usuário
-                    localStorage.setItem('pesquisaPachecoRespondida', 'true');
+                    // Guarda esse número na memória do celular
+                    numerosUsados.push(zapDigitado);
+                    localStorage.setItem('pachecoZaps', JSON.stringify(numerosUsados));
                     
-                    // Mostra a tela de sucesso
                     cardPromocao.style.display = 'none';
                     f.style.display = 'none';
                     document.getElementById('sucesso').style.display = 'block';
