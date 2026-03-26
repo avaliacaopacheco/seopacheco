@@ -143,14 +143,19 @@
 
         <div class="card" data-aos="fade-up">
             
-            <div id="ja-respondeu">
+                        <div id="ja-respondeu">
                 <i class="fas fa-ticket-alt check-icon" style="color: #ff8c00;"></i>
                 <div class="success-text">
                     <p><strong>VOCÊ JÁ ESTÁ CONCORRENDO!</strong></p><br>
                     <p>Já recebemos sua avaliação anteriormente.</p>
                     <p style="font-size: 1.4rem; color: #ff8c00; font-weight: 900; margin-top: 15px;">BOA SORTE!</p>
                 </div>
+                
+                <button onclick="localStorage.removeItem('pesquisaPachecoRespondida'); location.reload();" style="background:none; border:1px solid #444; color:#aaa; padding:8px 15px; border-radius:8px; margin-top:30px; cursor:pointer; font-size: 0.8rem;">
+                    <i class="fas fa-redo"></i> Errei meus dados (Refazer)
+                </button>
             </div>
+
 
             <form id="feedback-form">
                 
