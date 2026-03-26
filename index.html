@@ -22,32 +22,22 @@
 
         /* --- HEADER COM NOVO VOO SUAVE (X e Y) --- */
         header {
-            width: 100%;
-            height: 280px;
-            overflow: hidden; 
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 100%; height: 280px; overflow: hidden; background: #000;
+            display: flex; align-items: center; justify-content: center;
         }
         
         .header-logo-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            
-            /* O zoom de 1.15 dá a "sobra" de margem para a foto poder passear sem cortar */
+            width: 100%; height: 100%; object-fit: cover;
             transform: scale(1.15);
             animation: vooFalso 15s infinite ease-in-out;
         }
 
-        /* LÓGICA DO VOO FALSO (FRENTE/TRÁS = X | CIMA/BAIXO = Y) */
         @keyframes vooFalso {
             0% { transform: scale(1.15) translate(0px, 0px); }
-            25% { transform: scale(1.15) translate(15px, -15px); } /* Frente e Cima */
-            50% { transform: scale(1.15) translate(-10px, 10px); } /* Trás e Baixo */
-            75% { transform: scale(1.15) translate(10px, 15px); }  /* Frente e Baixo */
-            100% { transform: scale(1.15) translate(0px, 0px); }   /* Volta pro Centro */
+            25% { transform: scale(1.15) translate(15px, -15px); }
+            50% { transform: scale(1.15) translate(-10px, 10px); }
+            75% { transform: scale(1.15) translate(10px, 15px); }
+            100% { transform: scale(1.15) translate(0px, 0px); }
         }
 
         .brand-text-block {
@@ -64,7 +54,6 @@
 
         .container { width: 92%; max-width: 450px; margin: 20px auto 40px; }
 
-        /* --- KARD DE PROMOÇÃO PULSANDO FORTE --- */
         .promo-card {
             background: linear-gradient(145deg, #1a1a1a, #000);
             border: 2px solid var(--pacheco-red); border-radius: 20px; padding: 20px;
@@ -81,14 +70,12 @@
 
         .promo-text { font-size: 1.1rem; font-weight: 800; line-height: 1.4; text-transform: uppercase; }
 
-        /* --- CARD DE FORMULÁRIO --- */
         .card {
             background: rgba(30, 30, 30, 0.95); padding: 25px; border-radius: 25px;
             border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.8);
             text-align: center;
         }
 
-        /* --- SISTEMA DE ESTRELAS --- */
         .stars-container { display: flex; flex-direction: row-reverse; justify-content: center; gap: 8px; margin: 10px 0 20px; position: relative; }
         .stars-container input { position: absolute; opacity: 0; width: 1px; height: 1px; }
         .stars-container label { font-size: 2.2rem; color: #333; cursor: pointer; transition: 0.2s; }
@@ -107,19 +94,10 @@
         }
         input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
 
-        /* --- MENSAGEM DE ERRO (A CAIXA ELEGANTE VOLTOU) --- */
         #mensagem-erro {
-            display: none; /* Começa escondido */
-            background: rgba(230, 57, 70, 0.2);
-            border: 1px solid var(--pacheco-red);
-            color: #fff;
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 10px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            text-align: center;
-            animation: tremer 0.3s;
+            display: none; background: rgba(230, 57, 70, 0.2); border: 1px solid var(--pacheco-red);
+            color: #fff; padding: 12px; border-radius: 8px; margin-top: 10px;
+            font-weight: bold; font-size: 0.9rem; text-align: center; animation: tremer 0.3s;
         }
 
         @keyframes tremer {
@@ -136,7 +114,6 @@
             margin-top: 20px; cursor: pointer;
         }
 
-        /* --- SUCESSO --- */
         #sucesso { display: none; padding: 40px 10px; }
         .check-icon { font-size: 4.5rem; color: #27c93f; margin-bottom: 20px; }
         .success-text { font-size: 1.1rem; line-height: 1.6; color: #eee; text-align: center; }
@@ -205,16 +182,16 @@
                 </div>
                 
                 <label class="pergunta-label"><i class="fas fa-comment-dots"></i> Sugestões e Elogios:</label>
-                <textarea rows="3" placeholder="Conte-nos como foi sua experiência..."></textarea>
+                <textarea name="sugestoes" rows="3" placeholder="Conte-nos como foi sua experiência..."></textarea>
 
                 <label class="pergunta-label">Seu Nome:</label>
-                <input type="text" placeholder="Digite seu Nome" required>
+                <input type="text" name="nome" placeholder="Digite seu Nome" required>
 
                 <label class="pergunta-label">Seu WhatsApp:</label>
-                <input type="tel" placeholder="(19) 99999-9999" required>
+                <input type="tel" name="whatsapp" placeholder="(19) 99999-9999" required>
 
                 <label class="pergunta-label">Sua Data de Nascimento:</label>
-                <input type="date" required>
+                <input type="date" name="nascimento" required>
 
                 <div id="mensagem-erro">
                     <i class="fas fa-exclamation-triangle"></i> Por favor, preencha todos os campos e marque as estrelinhas!
@@ -249,7 +226,9 @@
         const btnSubmit = document.getElementById('btn-submit');
         const msgErro = document.getElementById('mensagem-erro');
 
-        // Escuta o clique no botão para mostrar a caixa vermelha se faltar algo
+        // LINK DA PLANILHA GOOGLE
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzJjj7CCZLnf-1serYKYAgGRAc50IAqo-gbNnVA9vdnRWY0Yh3dENhehOkXNalQy8za4w/exec';
+
         btnSubmit.addEventListener('click', () => {
             if (!f.checkValidity()) {
                 msgErro.style.display = 'block';
@@ -262,17 +241,23 @@
             if (!f.checkValidity()) { return; }
             e.preventDefault();
             
-            // Se passou na validação, esconde o erro e continua o fluxo
             msgErro.style.display = 'none';
             btnSubmit.innerText = "ENVIANDO...";
-            
-            setTimeout(() => {
-                document.querySelector('.promo-card').style.display = 'none';
-                f.style.display = 'none';
-                document.getElementById('sucesso').style.display = 'block';
-                AOS.refresh();
-                window.scrollTo(0,0);
-            }, 1500);
+            btnSubmit.disabled = true;
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(f) })
+                .then(response => {
+                    document.querySelector('.promo-card').style.display = 'none';
+                    f.style.display = 'none';
+                    document.getElementById('sucesso').style.display = 'block';
+                    AOS.refresh();
+                    window.scrollTo(0,0);
+                })
+                .catch(error => {
+                    btnSubmit.innerText = "ERRO! TENTE NOVAMENTE.";
+                    btnSubmit.disabled = false;
+                    console.error('Erro!', error.message);
+                });
         };
     </script>
 </body>
