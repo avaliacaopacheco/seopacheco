@@ -214,14 +214,20 @@
                 <button type="submit" class="btn-enviar" id="btn-submit">ENVIAR AVALIAÇÃO</button>
             </form>
 
-            <div id="sucesso">
-                <i class="fas fa-check-circle check-icon"></i>
+                        <div id="sucesso">
+                <i class="fas fa-check-circle check-icon" style="color: #27c93f;"></i>
                 <div class="success-text">
                     <p><strong>MUITO OBRIGADO, <span id="nome-tela-sucesso" style="color: #ff8c00;"></span>!</strong></p><br>
                     <p>Sua avaliação foi enviada e agora você está concorrendo a um <strong>Capitão p/2 pessoas</strong>.</p>
                     <p>Caso você seja sorteado, entraremos em contato pelo WhatsApp.</p><br>
                     <p style="font-size: 1.4rem; color: #ff8c00; font-weight: 900;">BOA SORTE!</p>
                 </div>
+                
+                <button onclick="localStorage.removeItem('pesquisaPachecoRespondida'); location.reload();" style="background:none; border:1px solid #444; color:#aaa; padding:8px 15px; border-radius:8px; margin-top:30px; cursor:pointer; font-size: 0.8rem;">
+                    <i class="fas fa-redo"></i> Errei meus dados (Refazer)
+                </button>
+            </div>
+
             </div>
         </div>
     </div>
