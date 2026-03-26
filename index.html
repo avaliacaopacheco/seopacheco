@@ -114,7 +114,7 @@
         }
 
         #sucesso, #ja-respondeu { display: none; padding: 40px 10px; }
-        .check-icon { font-size: 4.5rem; color: #27c93f; margin-bottom: 20px; }
+        .check-icon { font-size: 4.5rem; margin-bottom: 20px; }
         .success-text { font-size: 1.1rem; line-height: 1.6; color: #eee; text-align: center; }
 
         footer { padding: 30px; font-size: 0.8rem; color: #666; text-align: center; width: 100%; background: #000; }
@@ -137,25 +137,20 @@
             <i class="fas fa-gift" style="color: #ff8c00; font-size: 2rem; margin-bottom: 10px;"></i>
             <p class="promo-text">
                 Responda nossa avaliação para concorrer a um <br>
-                <span style="color: #ff8c00; font-size: 1.3rem;">Capitão p/2 + acompanhamento</span>
+                <span style="color: #ff8c00; font-size: 1.3rem;">Capitão p/2 mais acompanhamento</span>
             </p>
         </div>
 
         <div class="card" data-aos="fade-up">
             
-                        <div id="ja-respondeu">
+            <div id="ja-respondeu">
                 <i class="fas fa-ticket-alt check-icon" style="color: #ff8c00;"></i>
                 <div class="success-text">
                     <p><strong>VOCÊ JÁ ESTÁ CONCORRENDO!</strong></p><br>
                     <p>Já recebemos sua avaliação anteriormente.</p>
                     <p style="font-size: 1.4rem; color: #ff8c00; font-weight: 900; margin-top: 15px;">BOA SORTE!</p>
                 </div>
-                
-                <button onclick="localStorage.removeItem('pesquisaPachecoRespondida'); location.reload();" style="background:none; border:1px solid #444; color:#aaa; padding:8px 15px; border-radius:8px; margin-top:30px; cursor:pointer; font-size: 0.8rem;">
-                    <i class="fas fa-redo"></i> Errei meus dados (Refazer)
-                </button>
             </div>
-
 
             <form id="feedback-form">
                 
@@ -214,7 +209,7 @@
                 <button type="submit" class="btn-enviar" id="btn-submit">ENVIAR AVALIAÇÃO</button>
             </form>
 
-                        <div id="sucesso">
+            <div id="sucesso">
                 <i class="fas fa-check-circle check-icon" style="color: #27c93f;"></i>
                 <div class="success-text">
                     <p><strong>MUITO OBRIGADO, <span id="nome-tela-sucesso" style="color: #ff8c00;"></span>!</strong></p><br>
@@ -227,14 +222,12 @@
                     <i class="fas fa-redo"></i> Errei meus dados (Refazer)
                 </button>
             </div>
-
-            </div>
         </div>
     </div>
 
     <footer>
         Desenvolvido por <strong>Gabriel Piovesan</strong><br>
-        © 2026 Seo Pacheco | Todos os Direitos Reservados.
+        Seo Pacheco | Todos os Direitos Reservados. © 2026
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -247,14 +240,12 @@
         const cardPromocao = document.getElementById('card-promocao');
         const telaJaRespondeu = document.getElementById('ja-respondeu');
 
-        // VERIFICA SE O CLIENTE JÁ RESPONDEU ANTES (O CARIMBO)
         if (localStorage.getItem('pesquisaPachecoRespondida') === 'true') {
             cardPromocao.style.display = 'none';
             f.style.display = 'none';
             telaJaRespondeu.style.display = 'block';
         }
 
-        // LINK DA PLANILHA GOOGLE
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzJjj7CCZLnf-1serYKYAgGRAc50IAqo-gbNnVA9vdnRWY0Yh3dENhehOkXNalQy8za4w/exec';
 
         btnSubmit.addEventListener('click', () => {
@@ -280,7 +271,6 @@
 
             fetch(scriptURL, { method: 'POST', body: new FormData(f) })
                 .then(response => {
-                    // SALVA O CARIMBO NO CELULAR DO CLIENTE
                     localStorage.setItem('pesquisaPachecoRespondida', 'true');
                     
                     cardPromocao.style.display = 'none';
