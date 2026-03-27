@@ -3,78 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Deck Churrascaria | Pesquisa e Sorteio Premium</title>
+    <title>Seo Pacheco | Pesquisa e Sorteio</title>
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
-        :root {
-            --deck-wood: #d2995e; 
-            --star-active: #f1c40f;
-            --erro-red: #e63946;
-        }
+        :root { --pacheco-red: #e63946; --star-gold: #ffc107; }
 
-        html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; background-color: #1a1a1a; scroll-behavior: smooth; }
+        html, body { width: 100%; overflow-x: hidden; background-color: #000; scroll-behavior: smooth; }
 
         body {
             font-family: 'Segoe UI', sans-serif; color: white;
             display: flex; flex-direction: column; align-items: center; min-height: 100vh;
-            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('madeira.JPG'); 
-            background-size: 350px; background-repeat: repeat; background-attachment: fixed;
         }
 
-        header { width: 100%; padding: 15px 10px 0; text-align: center; }
-        .logo-img { width: 45%; max-width: 160px; filter: drop-shadow(0px 5px 15px rgba(0,0,0,0.8)); }
+        header {
+            width: 100%; height: 280px; overflow: hidden; background: #000;
+            display: flex; align-items: center; justify-content: center;
+        }
+        
+        .header-logo-img {
+            width: 100%; height: 100%; object-fit: cover;
+            transform: scale(1.15);
+            animation: vooFalso 15s infinite ease-in-out;
+        }
 
-        .page-titles { text-align: center; margin: 5px 0 10px; }
-        .main-title { font-size: 1.7rem; font-weight: 900; color: var(--deck-wood); text-transform: uppercase; margin: 0; letter-spacing: 1px; text-shadow: 1px 1px 10px rgba(0,0,0,1); }
-        .sub-title { font-size: 1rem; color: #fff; text-transform: uppercase; font-weight: bold; margin-top: 2px; opacity: 0.9; text-shadow: 1px 1px 4px rgba(0,0,0,1); }
+        @keyframes vooFalso {
+            0% { transform: scale(1.15) translate(0px, 0px); }
+            25% { transform: scale(1.15) translate(15px, -15px); }
+            50% { transform: scale(1.15) translate(-10px, 10px); }
+            75% { transform: scale(1.15) translate(10px, 15px); }
+            100% { transform: scale(1.15) translate(0px, 0px); }
+        }
 
-        .container { width: 92%; max-width: 420px; margin-bottom: 30px; }
+        .brand-text-block {
+            text-align: center; margin-top: -50px; position: relative; z-index: 10;
+        }
+        .main-brand-title {
+            font-size: 2.2rem; font-weight: 900; color: var(--pacheco-red);
+            text-transform: uppercase; text-shadow: 2px 2px 15px rgba(0,0,0,1);
+        }
+        .survey-subtitle {
+            font-size: 1.6rem; color: #ffffff; text-transform: uppercase; 
+            font-weight: bold; letter-spacing: 2px; text-shadow: 2px 2px 8px rgba(0,0,0,1);
+        }
+
+        .container { width: 92%; max-width: 450px; margin: 20px auto 40px; }
+
+        .promo-card {
+            background: linear-gradient(145deg, #1a1a1a, #000);
+            border: 2px solid var(--pacheco-red); border-radius: 20px; padding: 20px;
+            margin-bottom: 20px; text-align: center;
+            animation: pulsaGlowForte 2.0s infinite ease-in-out;
+            position: relative; z-index: 5; transform-origin: center;
+        }
+
+        @keyframes pulsaGlowForte {
+            0% { transform: scale(1); box-shadow: 0 0 10px rgba(230, 57, 70, 0.4); }
+            50% { transform: scale(1.02); box-shadow: 0 0 35px rgba(230, 57, 70, 0.9); }
+            100% { transform: scale(1); box-shadow: 0 0 10px rgba(230, 57, 70, 0.4); }
+        }
+
+        .promo-text { font-size: 1.1rem; font-weight: 800; line-height: 1.4; text-transform: uppercase; }
 
         .card {
-            background: rgba(0, 0, 0, 0.35); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-            padding: 20px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: rgba(30, 30, 30, 0.95); padding: 25px; border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            text-align: center;
         }
 
-        .pergunta-label { display: block; text-align: left; margin: 15px 0 10px; font-weight: bold; font-size: 0.85rem; color: #fff; text-shadow: 1px 1px 3px #000; }
-        .pergunta-label i { color: var(--deck-wood); margin-right: 8px; font-size: 0.9rem; }
+        .stars-container { display: flex; flex-direction: row-reverse; justify-content: center; gap: 8px; margin: 10px 0 20px; position: relative; }
+        .stars-container input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+        .stars-container label { font-size: 2.2rem; color: #333; cursor: pointer; transition: 0.2s; }
+        
+        .stars-container input:checked ~ label, 
+        .stars-container label:hover, 
+        .stars-container label:hover ~ label {
+            color: var(--star-gold); text-shadow: 0 0 10px rgba(255, 193, 7, 0.4);
+        }
 
-        .stars { display: flex; flex-direction: row-reverse; justify-content: center; gap: 8px; margin-bottom: 10px; padding: 10px; border-radius: 10px; }
-        .stars input { display: none; }
-        .stars label { font-size: 2rem; color: rgba(255,255,255,0.2); cursor: pointer; transition: 0.2s; }
-        .stars input:checked ~ label, .stars label:hover, .stars label:hover ~ label { color: var(--star-active); text-shadow: 0 0 8px rgba(241, 196, 15, 0.5); }
-
+        .pergunta-label { display: block; text-align: left; margin: 15px 0 5px; font-weight: bold; font-size: 0.95rem; }
         input, textarea {
-            width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 10px; color: white; font-size: 1rem; outline: none; margin-bottom: 10px; transition: 0.3s;
+            width: 100%; padding: 14px; background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px;
+            color: white; font-size: 1rem; outline: none; margin-bottom: 15px;
         }
+        input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
 
-        .opcoes-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 20px; padding: 8px; border-radius: 10px; }
-        .opcao-item input { display: none; }
-        .opcao-item label {
-            display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 8px 2px; border-radius: 6px; font-size: 0.65rem; cursor: pointer; transition: 0.2s;
-            height: 100%; text-align: center; text-transform: uppercase;
-        }
-        .opcao-item input:checked + label { background: rgba(210, 153, 94, 0.2); border-color: var(--deck-wood); color: var(--deck-wood); font-weight: bold; }
-
-        .auth-group { margin-top: 15px; text-align: left; padding: 8px; border-radius: 10px; }
-        .auth-option { display: flex; align-items: center; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px; border-radius: 10px; margin-bottom: 8px; cursor: pointer; }
-        .auth-option input[type="radio"] { width: 18px; height: 18px; margin-right: 12px; accent-color: var(--deck-wood); }
-        .auth-text { font-size: 0.72rem; line-height: 1.3; color: #ddd; }
-        .auth-option:has(input:checked) { background: rgba(210, 153, 94, 0.15); border-color: var(--deck-wood); }
-
-        /* --- SISTEMA DE AVISOS SEO PACHECO --- */
-        .erro-alerta {
-            display: none; background: rgba(230, 57, 70, 0.2); border: 1px solid var(--erro-red);
-            color: #fff; padding: 12px; border-radius: 8px; margin-top: 10px; margin-bottom: 10px;
+        /* --- ESTILO DOS ERROS --- */
+        #mensagem-erro, #mensagem-erro-zap-invalido, #mensagem-erro-email-invalido {
+            display: none; background: rgba(230, 57, 70, 0.2); border: 1px solid var(--pacheco-red);
+            color: #fff; padding: 12px; border-radius: 8px; margin-top: 10px;
             font-weight: bold; font-size: 0.9rem; text-align: center; animation: tremer 0.3s;
         }
+
         @keyframes tremer {
             0% { transform: translateX(0); }
             25% { transform: translateX(-5px); }
@@ -83,32 +108,69 @@
             100% { transform: translateX(0); }
         }
 
-        .btn-enviar { background: var(--deck-wood); color: #000; border: none; padding: 18px; width: 100%; border-radius: 12px; font-weight: 900; font-size: 1.1rem; margin-top: 10px; cursor: pointer; text-transform: uppercase; }
+        .btn-enviar {
+            background: var(--pacheco-red); color: white; border: none; padding: 18px;
+            width: 100%; border-radius: 12px; font-weight: bold; font-size: 1.2rem;
+            margin-top: 20px; cursor: pointer; text-transform: uppercase;
+        }
 
-        #sucesso { display: none; padding: 30px 10px; }
-        .check-icon { font-size: 4rem; color: #2ecc71; margin-bottom: 15px; }
+        #sucesso, #ja-respondeu { display: none; padding: 40px 10px; }
+        .check-icon { font-size: 4.5rem; color: #27c93f; margin-bottom: 20px; }
+        .success-text { font-size: 1.1rem; line-height: 1.6; color: #eee; text-align: center; }
 
-        footer { padding: 25px 15px; font-size: 0.7rem; color: #bbb; text-align: center; width: 100%; }
-        footer strong { color: #fff; }
+        .btn-reset {
+            background: none; border: 1px solid #ff8c00; color: #ff8c00; padding: 12px 20px; 
+            border-radius: 12px; margin-top: 15px; cursor: pointer; font-size: 0.9rem; 
+            font-weight: bold; width: 100%; display: block;
+        }
+        .btn-secondary { border-color: #444; color: #aaa; margin-top: 10px; font-size: 0.8rem; }
+
+        footer { padding: 30px; font-size: 0.8rem; color: #666; text-align: center; width: 100%; background: #000; }
     </style>
 </head>
 <body>
 
     <header>
-        <img src="logo-deck.PNG" alt="Logo Deck" class="logo-img">
+        <img src="pacheco.PNG" alt="Logo Seo Pacheco" class="header-logo-img">
     </header>
 
-    <div class="page-titles" id="titles">
-        <h1 class="main-title">Deck Churrascaria</h1>
-        <p class="sub-title">Pesquisa de Satisfação</p>
+    <div class="brand-text-block">
+        <h1 class="main-brand-title">SEO PACHECO</h1>
+        <p class="survey-subtitle">PESQUISA DE SATISFAÇÃO</p>
     </div>
 
     <div class="container">
-        <div class="card" id="card-principal">
-            <form id="feedback-form" novalidate>
+        
+        <div class="promo-card" data-aos="zoom-in" id="card-promocao">
+            <i class="fas fa-gift" style="color: #ff8c00; font-size: 2rem; margin-bottom: 10px;"></i>
+            <p class="promo-text">
+                Responda nossa avaliação para concorrer a um <br>
+                <span style="color: #ff8c00; font-size: 1.3rem;">Capitão p/2 + acompanhamento</span>
+            </p>
+        </div>
+
+        <div class="card" data-aos="fade-up">
+            
+            <div id="ja-respondeu">
+                <i class="fas fa-ticket-alt check-icon" style="color: #ff8c00;"></i>
+                <div class="success-text">
+                    <p><strong>VOCÊ JÁ ESTÁ CONCORRENDO!</strong></p><br>
+                    <p>Já recebemos sua avaliação anteriormente.</p>
+                    <p style="font-size: 1.4rem; color: #ff8c00; font-weight: 900; margin-top: 15px;">BOA SORTE!</p>
+                </div>
                 
-                <label class="pergunta-label"><i class="fas fa-utensils"></i>O que você achou da Refeição?</label>
-                <div class="stars">
+                <button onclick="localStorage.removeItem('pesquisaPachecoRespondida'); location.reload();" class="btn-reset">
+                    <i class="fas fa-users"></i> Nova Avaliação (Outra Pessoa)
+                </button>
+                <button onclick="localStorage.removeItem('pesquisaPachecoRespondida'); location.reload();" class="btn-reset btn-secondary">
+                    <i class="fas fa-redo"></i> Errei meus dados (Refazer)
+                </button>
+            </div>
+
+            <form id="feedback-form">
+                
+                <label class="pergunta-label"><i class="fas fa-drumstick-bite"></i> O que você achou da Refeição?</label>
+                <div class="stars-container">
                     <input type="radio" name="refeicao" id="c5" value="5" required><label for="c5" class="fas fa-star"></label>
                     <input type="radio" name="refeicao" id="c4" value="4"><label for="c4" class="fas fa-star"></label>
                     <input type="radio" name="refeicao" id="c3" value="3"><label for="c3" class="fas fa-star"></label>
@@ -116,8 +178,8 @@
                     <input type="radio" name="refeicao" id="c1" value="1"><label for="c1" class="fas fa-star"></label>
                 </div>
 
-                <label class="pergunta-label"><i class="fas fa-concierge-bell"></i>Nota para o Atendimento:</label>
-                <div class="stars">
+                <label class="pergunta-label"><i class="fas fa-concierge-bell"></i> Nota para o Atendimento:</label>
+                <div class="stars-container">
                     <input type="radio" name="atendimento" id="a5" value="5" required><label for="a5" class="fas fa-star"></label>
                     <input type="radio" name="atendimento" id="a4" value="4"><label for="a4" class="fas fa-star"></label>
                     <input type="radio" name="atendimento" id="a3" value="3"><label for="a3" class="fas fa-star"></label>
@@ -125,35 +187,32 @@
                     <input type="radio" name="atendimento" id="a1" value="1"><label for="a1" class="fas fa-star"></label>
                 </div>
 
-                <label class="pergunta-label"><i class="fas fa-thumbs-up"></i>Recomendaria o Deck?</label>
-                <div class="stars">
+                <label class="pergunta-label"><i class="fas fa-broom"></i> Limpeza e Organização:</label>
+                <div class="stars-container">
+                    <input type="radio" name="limpeza" id="l5" value="5" required><label for="l5" class="fas fa-star"></label>
+                    <input type="radio" name="limpeza" id="l4" value="4"><label for="l4" class="fas fa-star"></label>
+                    <input type="radio" name="limpeza" id="l3" value="3"><label for="l3" class="fas fa-star"></label>
+                    <input type="radio" name="limpeza" id="l2" value="2"><label for="l2" class="fas fa-star"></label>
+                    <input type="radio" name="limpeza" id="l1" value="1"><label for="l1" class="fas fa-star"></label>
+                </div>
+
+               <label class="pergunta-label"><i class="fas fa-heart"></i> Recomendaria o Seo Pacheco?</label>
+                <div class="stars-container">
                     <input type="radio" name="recomenda" id="r5" value="5" required><label for="r5" class="fas fa-star"></label>
                     <input type="radio" name="recomenda" id="r4" value="4"><label for="r4" class="fas fa-star"></label>
                     <input type="radio" name="recomenda" id="r3" value="3"><label for="r3" class="fas fa-star"></label>
                     <input type="radio" name="recomenda" id="r2" value="2"><label for="r2" class="fas fa-star"></label>
                     <input type="radio" name="recomenda" id="r1" value="1"><label for="r1" class="fas fa-star"></label>
                 </div>
-
-                <label class="pergunta-label"><i class="fas fa-bullhorn"></i>Como você conheceu o Deck?</label>
-                <div class="opcoes-grid">
-                    <div class="opcao-item"><input type="radio" name="como_soube" id="opt-insta" value="Instagram" required><label for="opt-insta">Instagram</label></div>
-                    <div class="opcao-item"><input type="radio" name="como_soube" id="opt-face" value="Facebook"><label for="opt-face">Facebook</label></div>
-                    <div class="opcao-item"><input type="radio" name="como_soube" id="opt-google" value="Google"><label for="opt-google">Google</label></div>
-                    <div class="opcao-item"><input type="radio" name="como_soube" id="opt-amigos" value="Amigos/Familia"><label for="opt-amigos">Amigos/Familia</label></div>
-                    <div class="opcao-item"><input type="radio" name="como_soube" id="opt-passando" value="Passando"><label for="opt-passando" style="font-size: 0.55rem;">Passando em Frente</label></div>
-                    <div class="opcao-item"><input type="radio" name="como_soube" id="opt-outros" value="Outros"><label for="opt-outros">Outros</label></div>
-                </div>
-
-                <label class="pergunta-label"><i class="fas fa-comment-dots"></i>Sugestões ou elogios?</label>
-                <textarea name="sugestoes" rows="2" placeholder="Sua opinião..."></textarea>
-
-                <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 20px 0;">
+                
+                <label class="pergunta-label"><i class="fas fa-comment-dots"></i> Sugestões e Elogios:</label>
+                <textarea name="sugestoes" rows="3" placeholder="Conte-nos como foi sua experiência..."></textarea>
 
                 <label class="pergunta-label">Seu Nome:</label>
-                <input type="text" name="nome" id="input-nome" placeholder="Digite seu nome" required>
+                <input type="text" name="nome" id="input-nome" placeholder="Digite seu Nome" required>
 
                 <label class="pergunta-label">Seu WhatsApp:</label>
-                <input type="tel" name="whatsapp" id="input-zap" placeholder="(19) 99999-9999" maxlength="15" required>
+                <input type="tel" name="whatsapp" id="input-whatsapp" placeholder="(19) 99999-9999" maxlength="15" required>
 
                 <label class="pergunta-label">Seu E-mail:</label>
                 <input type="email" name="email" id="input-email" placeholder="seuemail@exemplo.com" required>
@@ -161,91 +220,116 @@
                 <label class="pergunta-label">Sua Data de Nascimento:</label>
                 <input type="date" name="nascimento" required>
 
-                <label class="pergunta-label">Autorização de Marketing:</label>
-                <div class="auth-group">
-                    <label class="auth-option"><input type="radio" name="autoriza_marketing" value="Sim" required><span class="auth-text">Autorizo o uso das informações acima para o envio de promoções e novidades.</span></label>
-                    <label class="auth-option"><input type="radio" name="autoriza_marketing" value="Não" required><span class="auth-text">Não autorizo o uso das informações acima para o envio de promoções e novidades.</span></label>
+                <div id="mensagem-erro">
+                    <i class="fas fa-exclamation-triangle"></i> Por favor, preencha todos os campos e marque as estrelinhas!
+                </div>
+                <div id="mensagem-erro-zap-invalido">
+                    <i class="fas fa-phone-slash"></i> Número de WhatsApp incorreto!
+                </div>
+                <div id="mensagem-erro-email-invalido">
+                    <i class="fas fa-envelope"></i> Por favor, insira um e-mail válido!
                 </div>
 
-                <div id="mensagem-erro" class="erro-alerta"><i class="fas fa-exclamation-triangle"></i> Por favor, preencha todos os campos e marque as estrelinhas!</div>
-                <div id="mensagem-erro-zap-invalido" class="erro-alerta"><i class="fas fa-phone-slash"></i> Número de WhatsApp incorreto!</div>
-                <div id="mensagem-erro-email-invalido" class="erro-alerta"><i class="fas fa-envelope"></i> Por favor, insira um e-mail válido!</div>
-
-                <button type="submit" class="btn-enviar" id="btn-submit">ENVIAR E CONCORRER</button>
+                <button type="submit" class="btn-enviar" id="btn-submit">ENVIAR AVALIAÇÃO</button>
             </form>
 
             <div id="sucesso">
-                <i class="fas fa-check-circle check-icon"></i>
-                <h2 style="color: var(--deck-wood); margin-bottom: 10px;">OBRIGADO, <span id="span-nome"></span>!</h2>
-                <p id="msg-agradecimento" style="line-height: 1.5; font-size: 1rem; color: #eee;">Tua avaliação foi enviada com sucesso! Agora você está participando do sorteio de uma picanha P/2 pessoas. Caso você seja sorteado, entraremos em contato por WhatsApp. Boa sorte!</p>
-                <button onclick="location.reload()" style="background:none; border:2px solid var(--deck-wood); color:#fff; padding:10px 20px; border-radius:10px; margin-top:25px; cursor:pointer; font-weight: bold;">NOVA AVALIAÇÃO</button>
+                <i class="fas fa-check-circle check-icon" style="color: #27c93f;"></i>
+                <div class="success-text">
+                    <p><strong>MUITO OBRIGADO, <span id="nome-tela-sucesso" style="color: #ff8c00;"></span>!</strong></p><br>
+                    <p>Sua avaliação foi enviada e agora você está concorrendo a um <strong>Capitão p/2 pessoas</strong>.</p>
+                    <p>Caso você seja sorteado, entraremos em contato pelo WhatsApp.</p><br>
+                    <p style="font-size: 1.4rem; color: #ff8c00; font-weight: 900;">BOA SORTE!</p>
+                </div>
+                
+                <button onclick="localStorage.removeItem('pesquisaPachecoRespondida'); location.reload();" class="btn-reset">
+                    <i class="fas fa-users"></i> Nova Avaliação (Outra Pessoa)
+                </button>
+                <button onclick="localStorage.removeItem('pesquisaPachecoRespondida'); location.reload();" class="btn-reset btn-secondary">
+                    <i class="fas fa-redo"></i> Errei meus dados (Refazer)
+                </button>
             </div>
+
         </div>
     </div>
 
-    <footer> Desenvolvido por <strong>Gabriel Piovesan</strong><br> © 2026 Deck Churrascaria </footer>
+    <footer>
+        Desenvolvido por <strong>Gabriel Piovesan</strong><br>
+        © 2026 Seo Pacheco | Todos os Direitos Reservados.
+    </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ once: true });
+        
         const f = document.getElementById('feedback-form');
-        const btn = document.getElementById('btn-submit');
-        const inputZap = document.getElementById('input-zap');
+        const btnSubmit = document.getElementById('btn-submit');
+        const msgErro = document.getElementById('mensagem-erro');
+        const inputZap = document.getElementById('input-whatsapp');
         const inputEmail = document.getElementById('input-email');
+        const cardPromocao = document.getElementById('card-promocao');
+        const telaJaRespondeu = document.getElementById('ja-respondeu');
 
+        if (localStorage.getItem('pesquisaPachecoRespondida') === 'true') {
+            cardPromocao.style.display = 'none';
+            f.style.display = 'none';
+            telaJaRespondeu.style.display = 'block';
+        }
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzJjj7CCZLnf-1serYKYAgGRAc50IAqo-gbNnVA9vdnRWY0Yh3dENhehOkXNalQy8za4w/exec';
+
+        // MÁSCARA ZAP
         inputZap.addEventListener('input', (e) => {
-            let v = e.target.value.replace(/\D/g, "");
-            if (v.length > 11) v = v.slice(0, 11);
-            if (v.length > 10) e.target.value = v.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
-            else if (v.length > 6) e.target.value = v.replace(/^(\d{2})(\d{4})(\d{0,4})$/, "($1) $2-$3");
-            else if (v.length > 2) e.target.value = v.replace(/^(\d{2})(\d{0,5})$/, "($1) $2");
-            else e.target.value = v.replace(/^(\d*)$/, "($1");
+            let value = e.target.value.replace(/\D/g, "");
+            if (value.length > 11) value = value.slice(0, 11);
+            if (value.length > 10) e.target.value = value.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
+            else if (value.length > 6) e.target.value = value.replace(/^(\d{2})(\d{4})(\d{0,4})$/, "($1) $2-$3");
+            else if (value.length > 2) e.target.value = value.replace(/^(\d{2})(\d{0,5})$/, "($1) $2");
+            else e.target.value = value.replace(/^(\d*)$/, "($1");
         });
-
-        const scriptURL = 'COLOQUE_AQUI_O_LINK_DO_SCRIPT_DA_PLANILHA_DO_DECK';
 
         f.onsubmit = (e) => {
             e.preventDefault();
             
-            document.querySelectorAll('.erro-alerta').forEach(el => el.style.display = 'none');
+            msgErro.style.display = 'none';
+            document.getElementById('mensagem-erro-zap-invalido').style.display = 'none';
+            document.getElementById('mensagem-erro-email-invalido').style.display = 'none';
 
             const cleanZap = inputZap.value.replace(/\D/g, "");
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-            const radioGroups = ['refeicao', 'atendimento', 'recomenda', 'como_soube', 'autoriza_marketing'];
-            let radiosOk = true;
-            radioGroups.forEach(name => { if(!f.querySelector(`input[name="${name}"]:checked`)) radiosOk = false; });
-
-            if (!f.checkValidity() || !radiosOk) {
-                document.getElementById('mensagem-erro').style.display = 'block';
+            if (!f.checkValidity()) {
+                msgErro.style.display = 'block';
                 return;
             }
-
             if (cleanZap.length < 11) {
                 document.getElementById('mensagem-erro-zap-invalido').style.display = 'block';
                 return;
             }
-
             if (!emailRegex.test(inputEmail.value)) {
                 document.getElementById('mensagem-erro-email-invalido').style.display = 'block';
                 return;
             }
+            
+            const nomeCompleto = document.getElementById('input-nome').value;
+            const primeiroNome = nomeCompleto.split(' ')[0]; 
+            document.getElementById('nome-tela-sucesso').innerText = primeiroNome.toUpperCase();
 
-            btn.innerText = "ENVIANDO...";
-            btn.disabled = true;
-            const nomeUsuario = document.getElementById('input-nome').value.split(' ')[0].toUpperCase();
+            btnSubmit.innerText = "ENVIANDO...";
+            btnSubmit.disabled = true;
 
             fetch(scriptURL, { method: 'POST', body: new FormData(f) })
-                .then(() => {
-                    document.getElementById('titles').style.display = 'none';
-                    document.getElementById('span-nome').innerText = nomeUsuario;
+                .then(response => {
+                    localStorage.setItem('pesquisaPachecoRespondida', 'true');
+                    cardPromocao.style.display = 'none';
                     f.style.display = 'none';
                     document.getElementById('sucesso').style.display = 'block';
-                    window.scrollTo(0, 0);
+                    AOS.refresh();
+                    window.scrollTo(0,0);
                 })
-                .catch(() => {
-                    btn.innerText = "ERRO! TENTE NOVAMENTE.";
-                    btn.disabled = false;
+                .catch(error => {
+                    btnSubmit.innerText = "ERRO! TENTE NOVAMENTE.";
+                    btnSubmit.disabled = false;
                 });
         };
     </script>
