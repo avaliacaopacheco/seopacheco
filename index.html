@@ -86,6 +86,10 @@
         }
 
         .pergunta-label { display: block; text-align: left; margin: 15px 0 5px; font-weight: bold; font-size: 0.95rem; }
+        
+        /* Ajuste para alinhar os ícones nas perguntas e MUDAR A COR PARA BRANCO */
+        .pergunta-label i { color: #fff; margin-right: 10px; font-size: 1.1rem; }
+
         input, textarea {
             width: 100%; padding: 14px; background: rgba(0, 0, 0, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px;
@@ -125,7 +129,9 @@
         }
         .btn-secondary { border-color: #444; color: #aaa; margin-top: 10px; font-size: 0.8rem; }
 
+        /* DESTAQUE DO NOME NO RODAPÉ - BRANCO */
         footer { padding: 30px; font-size: 0.8rem; color: #666; text-align: center; width: 100%; background: #000; }
+        footer strong { color: #fff; } /* Adicionado para destacar seu nome em branco */
     </style>
 </head>
 <body>
@@ -196,7 +202,7 @@
                     <input type="radio" name="limpeza" id="l1" value="1"><label for="l1" class="fas fa-star"></label>
                 </div>
 
-               <label class="pergunta-label"><i class="fas fa-heart"></i> Recomendaria o Seo Pacheco?</label>
+                <label class="pergunta-label"><i class="fas fa-heart"></i> Recomendaria o Seo Pacheco?</label>
                 <div class="stars-container">
                     <input type="radio" name="recomenda" id="r5" value="5" required><label for="r5" class="fas fa-star"></label>
                     <input type="radio" name="recomenda" id="r4" value="4"><label for="r4" class="fas fa-star"></label>
@@ -208,13 +214,13 @@
                 <label class="pergunta-label"><i class="fas fa-comment-dots"></i> Sugestões e Elogios:</label>
                 <textarea name="sugestoes" rows="3" placeholder="Conte-nos como foi sua experiência..."></textarea>
 
-                <label class="pergunta-label">Seu Nome:</label>
+                <label class="pergunta-label"><i class="fas fa-user"></i> Seu Nome:</label>
                 <input type="text" name="nome" id="input-nome" placeholder="Digite seu Nome" required>
 
-                <label class="pergunta-label">Seu WhatsApp:</label>
+                <label class="pergunta-label"><i class="fas fa-phone"></i> Seu WhatsApp:</label>
                 <input type="tel" name="whatsapp" id="input-whatsapp" placeholder="(19) 99999-9999" maxlength="15" required>
 
-                <label class="pergunta-label">Sua Data de Nascimento:</label>
+                <label class="pergunta-label"><i class="fas fa-calendar-alt"></i> Sua Data de Nascimento:</label>
                 <input type="date" name="nascimento" required>
 
                 <div id="mensagem-erro">
